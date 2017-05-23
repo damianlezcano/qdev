@@ -10,6 +10,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -69,13 +70,13 @@ public class MessageRestService {
 		return Response.ok(html).build();
 	}
 	
-	@GET
-	@Path("/{username}/{machine}/{folder}")
-	@Consumes(MediaType.TEXT_HTML)
-	public Response method4(@PathParam("username") String username, @PathParam("machine") String machine, @PathParam("folder") String folder) {
-        String html = VelocityTemplateFactory.getInstance().getFile(files.get(folder));
-		return Response.ok(html).build();
-	}
+//	@GET
+//	@Path("/{username}/{machine}/{folder}")
+//	@Consumes(MediaType.TEXT_HTML)
+//	public Response method4(@PathParam("username") String username, @PathParam("machine") String machine, @PathParam("folder") String folder) {
+//        String html = VelocityTemplateFactory.getInstance().getFile(files.get(folder));
+//		return Response.ok(html).build();
+//	}
 	
 	@GET
 	@Path("/{username}/{machine}/{folder}/console")
@@ -85,5 +86,18 @@ public class MessageRestService {
         StringWriter writer = new StringWriter();
         t.merge( new VelocityContext(), writer );	
 		return Response.ok(writer.toString()).build();
+	}
+	
+	@GET
+	@Path("/{username}/{machine}/{folder}")
+	@Consumes(MediaType.TEXT_HTML)
+	public Response method6(@PathParam("username") String username, @PathParam("machine") String machine, @PathParam("folder") String folder, @QueryParam("open") String open) {
+		if(open == null){
+	        String html = VelocityTemplateFactory.getInstance().getFile(files.get(folder));
+			return Response.ok(html).build();
+		}else{
+			String html = VelocityTemplateFactory.getInstance().getOpen("asfasfasfasdfasfd");
+			return Response.ok(html).build();			
+		}
 	}
 }

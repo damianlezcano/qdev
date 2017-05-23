@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<textarea rows="40%" cols="90%" style="overflow: hidden">
+$content
+</textarea>
+<br>
+<button type="submit" form="nameform" value="Submit">Submit</button>
+
+</body>
+</html>

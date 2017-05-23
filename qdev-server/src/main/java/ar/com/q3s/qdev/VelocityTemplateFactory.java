@@ -2,8 +2,6 @@ package ar.com.q3s.qdev;
 
 import java.io.StringWriter;
 
-import javax.ws.rs.core.Response;
-
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -21,6 +19,7 @@ public class VelocityTemplateFactory {
 	private Template folder;
 	private Template file;
 	private Template console;
+	private Template open;
 	
 	private VelocityTemplateFactory() {
 		ve = new VelocityEngine();
@@ -85,6 +84,17 @@ public class VelocityTemplateFactory {
 			console = ve.getTemplate( "/console.vm" );	
 		}
 		return console;
+	}
+
+	public Template getOpen(){
+		if(open == null){
+			open = ve.getTemplate( "/open.vm" );	
+		}
+		return open;
+	}
+
+	public String getOpen(Object items){
+        return merge(getOpen(), "content", items);
 	}
 	
 	public String merge(Template t, String key, Object items){
